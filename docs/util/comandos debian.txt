@@ -1,0 +1,13 @@
+
+
+
+docker exec -i -t <idenficador> /bin/bash
+
+root@78ff948b5258:/app# apt-get update
+
+root@78ff948b5258:/app# apt-get install iputils-ping
+
+
+
+
+
