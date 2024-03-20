@@ -2,22 +2,46 @@
 
 Hands-On para introdução dos conceitos do Docker e sua utilização com o Genexus.
 
-### Instalando o Docker
+### Requisitos
 
-Inicialmente é necessário configurar o ambiente para trabalharmos com o Docker e Genexus. Vamos instalar o Docker Desktop for Windows na mesma máquina que tem o Genexus  instalado.
+Inicialmente é necessário configurar os requisitos para trabalharmos com o Grafana.
+
+Os requisitos são:
+- Docker Desktop for Windows
+- Genexus 18
+- Gerador .NET Core (https://wiki.genexus.com/commwiki/wiki?38605,.NET+Generator+Requirements)
+- SQL Server 2016 ou superior
+
+### Instalação do Docker Desktop for Windows
 
 O primeiro passo é ler a documentação do Docker que explica os requisitos para a instalação do Docker Desktop for Windows:
 
-- [Requisitos para o Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)
+- [Requisitos para o Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/#system-requirements)
 
-Um ponto importante dos requisistos é a questão da configuração do Hyper-V no Windows se ele já não estiver configurado. O link abaixo explica como configurar o Hyper-V no Windows 10.
+Após a leitura e configuração dos requisitos, agora é fazer o download do Docker Desktop for Windows e a instalação.
 
-- [Configuração do Hyper-V](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization)
-
-Após a leitura e configuração dos requisitos, agora é fazer o download do Docker Desktop for Windows e a instalação, para isso siga as instruções do link abaixo:
-
-- [Download do Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+- [Instalar o Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/#install-docker-desktop-on-windows)
 
 Com isso temos o ambiente preparado para executar os contêineres Docker.
+
+### Copiar os arquivos do hands-on
+
+Para prosseguir será necessário copiar os arquivos do hands-on, para isso, realizar o clone do repositório git ou o download do zip.
+
+![githubproject](docs/imagens/githubproject.png)
+
+### Criar um KB Genexus 
+
+Criar uma KB com o environment .NET Core.
+
+![KB NET Core](/docs/imagens/geradornetcore.png)
+
+Com a KB criada, importar o arquivo xpz `HandsOnDocker.xpz` que está na pasta `genexus/HandsOnDocker.xpz` arquivos do git que foram baixados. 
+
+![xpz](/docs/imagens/genexusxpz.png)
+
+Crie a base de dados SQL Server para os dados e rode a aplicação, configure seu SQL Server para utilizar login com um usuário SQL e configure a conexão da aplicação utilizando um usuário e senha do SQL.
+
+![appgx](/docs/imagens/appgx.png)
 
 Próximo: [Atividade 01](docs/01-atividade.md)

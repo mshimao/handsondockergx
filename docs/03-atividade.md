@@ -4,42 +4,44 @@
 
 Nesta atividade vamos ver como utilizar o Dockerfile para fazermos o deploy de aplicações em contêineres Docker.
 
-Inicialmente faça o download da aplicação de exemplo que iremos instalar. 
+Um Dockerfile é um documento de texto que contém todas as instruções necessárias para criar uma imagem Docker. Com ele, é possível automatizar o processo de construção de imagens, especificando os comandos que um usuário executaria na linha de comando para montar a imagem desejada.
 
-- [SampleWebApp.war](https://github.com/mshimao/Hands-On-Docker-com-Genexus/tree/master/docs/dockerfile/SampleWebApp.war)
+- [Documentação sobre o dockerfile](https://docs.docker.com/reference/dockerfile/)
 
-Crie uma pasta no seu drive C: chamada HandsOnDocker e copie o arquivo war para esta pasta.
+
+#### Passo 1
+
+Crie uma pasta no seu drive C: chamada HandsOnDocker e copie o arquivo SampleWebApp.war que está na pasta appjava para esta pasta.
 
 ```bash
- O volume na unidade C não tem nome.
- O Número de Série do Volume é DA2B-B761
+C:\HandsOnDocker>dir
+ Volume in drive C has no label.
+ Volume Serial Number is FAAB-D7AE
 
- Pasta de C:\HandsOnDocker
+ Directory of C:\HandsOnDocker
 
-30/06/2019  11:14    <DIR>          .
-30/06/2019  11:14    <DIR>          ..
-30/06/2019  11:13             8.618 SampleWebApp.war
-               1 arquivo(s)          8.618 bytes
-               2 pasta(s)   12.963.368.960 bytes disponíveis
+03/20/2024  10:33 AM    <DIR>          .
+03/18/2024  02:52 PM             8,618 SampleWebApp.war
+               1 File(s)          8,618 bytes
+               1 Dir(s)  11,219,484,672 bytes free
 ``` 
 
-Abra o Bloco de Notas e crie um arquivo chamado Dockerfile, como o arquivo deve ser sem extensão, temos que tirar a extensão txt que o Bloco de Notas coloca.
+Abra o Bloco de Notas e crie um arquivo chamado Dockerfile, como o arquivo deve ser sem extensão, temos que tirar a extensão txt que o Bloco de Notas coloca, para isso use o comando `ren Dockerfile.txt Dockerfile`.
 
 ```bash
 C:\HandsOnDocker>ren Dockerfile.txt Dockerfile
 
 C:\HandsOnDocker>dir
- O volume na unidade C não tem nome.
- O Número de Série do Volume é DA2B-B761
+ Volume in drive C has no label.
+ Volume Serial Number is FAAB-D7AE
 
- Pasta de C:\HandsOnDocker
+ Directory of C:\HandsOnDocker
 
-30/06/2019  11:19    <DIR>          .
-30/06/2019  11:19    <DIR>          ..
-30/06/2019  11:50                65 Dockerfile
-30/06/2019  11:13             8.618 SampleWebApp.war
-               2 arquivo(s)          8.683 bytes
-               2 pasta(s)   12.898.099.200 bytes disponíveis
+03/20/2024  10:36 AM    <DIR>          .
+03/20/2024  10:35 AM                 0 Dockerfile
+03/18/2024  02:52 PM             8,618 SampleWebApp.war
+               2 File(s)          8,618 bytes
+               1 Dir(s)  11,219,140,608 bytes free
 
 ```
 
@@ -64,35 +66,41 @@ Abra um tela de linha de comando e se posicione na pasta C:\HandsOnDocker e digi
 
 ```bash
 C:\HandsOnDocker>docker build -t tomcatsample .
-Sending build context to Docker daemon  11.26kB
-Step 1/2 : FROM tomcat
- ---> 5377fd8533c3
-Step 2/2 : COPY SampleWebApp.war /usr/local/tomcat/webapps/
- ---> d2f1799e252d
-Successfully built d2f1799e252d
-Successfully tagged tomcatsample:latest
-SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+[+] Building 0.0s (0/0)                                                                                  docker:default
+2024/03/20 10:43:24 http2: server: error reading preface from client //./pipe/docker_engine: file has already been close[+] Building 0.5s (7/7) FINISHED                                                                         docker:default
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 98B                                                                                0.0s
+ => [internal] load metadata for docker.io/library/tomcat:latest                                                   0.0s
+ => [internal] load build context                                                                                  0.1s
+ => => transferring context: 38B                                                                                   0.0s
+ => [1/2] FROM docker.io/library/tomcat                                                                            0.0s
+ => CACHED [2/2] COPY SampleWebApp.war /usr/local/tomcat/webapps/                                                  0.0s
+ => exporting to image                                                                                             0.1s
+ => => exporting layers                                                                                            0.0s
+ => => writing image sha256:4b2673e522278525d85e5b02c3e05d0bf890e8c8821ceab8174c2fb2d69ff001                       0.0s
+ => => naming to docker.io/library/tomcatsample                                                                    0.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+
+C:\HandsOnDocker>
 ```
 Se listarmos a imagens que temos no Host Docker veremos que foi gerado uma nova imagem com o nome tomcatsample.
+Para listar as imagens usar o comando `docker images`.
 
 ```bash
 C:\HandsOnDocker>docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-tomcatsample        latest              d2f1799e252d        45 seconds ago      506MB
-tomcat              latest              5377fd8533c3        2 weeks ago         506MB
+REPOSITORY     TAG       IMAGE ID       CREATED         SIZE
+tomcatsample   latest    4b2673e52227   6 minutes ago   455MB
+tomcat         latest    405afe63d576   13 days ago     455MB
 ```
 
 O próximo passo é criar um container baseado na nossa nova imagem, executando o comando docker run. Execute o comando `docker run -p 8888:8080 tomcatsample` para subir um contêiner usando a imagem tomcatsample.
+A porta padrão 8080 do tomcat está sendo mapeada para a porta 8888 para evitar conflitos, se você já tem algum programa utilizando essa porta, mude para uma outra disponível.
 
-```bash
-C:\HandsOnDocker>docker run -p 8888:8080 tomcatsample
-30-Jun-2019 15:01:52.291 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.5.42
-30-Jun-2019 15:01:52.304 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Jun 4 2019 20:29:04 UTC
-30-Jun-2019 15:01:52.304 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.5.42.0
-30-Jun-2019 15:01:52.304 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
-30-Jun-2019 15:01:52.304 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.9.125-linuxkit
-...
-```
+![run tomcatsample](imagens/tomcatsample.png)
 
 Abra um browser e digite a seguinte Url http://localhost:8888/SampleWebApp/.
 
@@ -100,19 +108,14 @@ Abra um browser e digite a seguinte Url http://localhost:8888/SampleWebApp/.
 
 E como podemos ver, a aplicação de exemplo foi instalada com sucesso.
 
-Para seguirmos, liste os contêineres ativos e pare o contêiner do tomcatsample com o comando `docker stop`.
+Para seguirmos, liste os contêineres ativos com o comando `docker ps`.
 
-```bash
-C:\HandsOnDocker>docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-7f0187966811        tomcatsample        "catalina.sh run"   10 minutes ago      Up 10 minutes       0.0.0.0:8888->8080/tcp   jovial_clarke
+![docker ps](imagens/dockerps.png)
 
-C:\HandsOnDocker>docker stop 7f0
-7f0
-```
+Para parar o contêiner que está sendo executado utilizar o comando `docker stop`, informando o ID do container, neste caso `docker stop 5880a717ef9c`.
 
-Vimos como fazer o deploy de uma aplicação na mão, agora vamos ver como fazer isso com o Genexus (ou com o Visual Studio).
+![docker stop](imagens/dockerstop.png)
 
-Deploy com Genexus: [Atividade 03b](03b-atividade.md)
+Vimos como fazer o deploy de uma aplicação na mão, agora vamos ver como fazer isso com o Genexus.
 
-Deploy com Visual Studio: [Atividade 03c](03c-atividade.md)
+Próximo: [Atividade 04](04-atividade.md)
