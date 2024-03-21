@@ -1,84 +1,61 @@
 # Atividade 07
 
-## Docker Compose
+## Docker Hub
 
-### Implantação de uma aplicação Genexus com Docker Compose
+O Docker Hub é um repositório público de imagens de containers, onde diversas empresas e pessoas podem publicar imagens pré-compiladas de soluções. Essas soluções incluem desde WordPress, MySql e outras aplicações diversas.
+Nele, você encontra imagens prontas para uso, criadas por desenvolvedores da comunidade, projetos open-source e fornecedores de software independentes (ISVs).
 
-Nesta atividade tente criar uma infra estrutura para executar uma aplicação .Net Core acessando um servidor SQL Server com o banco de dados num Volume Docker.
-
-![Infra Docker Compose](imagens/infra-dockercompose.png)
+### Publicando uma imagem no Docker Hub
 
 #### Passo 1
 
-No Genexus, 
+Abra um prompt de linha de comando e digite o comando `docker login`. Informe o usuário e senha que foi criado anteriormente.
 
-![target dir](imagens/targetenvdir.png)
+![docker login](imagens/dockerhublogin.png)
 
-Crie na pasta C:\HandsOnDocker um arquivo com o nome "docker-compose-gx-sql.yml" e digite o conteúdo abaixo.
+#### Passo 2
 
-```docker-compose
-version: '3.1'
+Acesse o site do Docker Hub e faça login.
 
-services:
+- [Docker Hub](https://hub.docker.com/)
 
-  wordpress:
-    image: wordpress
-    restart: always
-    ports:
-      - 8888:80
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
-    volumes:
-      - wordpress:/var/www/html
+#### Passo 3
 
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    volumes:
-      - db:/var/lib/mysql
+Na aba "Repositories", pegue o nome da conta, no exemplo da imagem é "mkshimao".
 
-volumes:
-  wordpress:
-  db:
-```
+![Docker Hub Web](imagens/dockerhubweb.png)
 
-Inicialmente crie um volume para persistir os dados do MySQL e configure um contêiner para usar esse volume seguindo as instruções do post (Criando Volumes com Docker)[https://blog.alura.com.br/criando-volumes-com-docker/].
+#### Passo 4
 
-Use a imagem do MySQL que já foi baixada na atividade anterior para subir o contêiner:
+No Genexus, editar as opções de deploy, clicando em "options". 
+Acrescentar o nome da conta do Docker Hub no campo "Docker Image name", neste exemplo o nome da imagem ficaria "mkshimao/handsondockernetsqlserver"
 
-```bash
-mysql:5.7
-```
-Também será necessário configurar a senha do root informando o valor da variável MYSQL_ROOT_PASSWORD no parâmetro -e (variáveis de ambientes do contêiner).
+![GX Docker Image Name](imagens/deployoptions.png)
 
-``` bash
--e MYSQL_ROOT_PASSWORD=password 
-```
+#### Passo 5
 
-Depois que o contêiner estiver ativo, conecte com o HeidiSQL para verificar se o MySQL está funcionando adequadamente.
+Clicar no botão "Deploy" para gerar a imagem com o novo nome.
 
-Agora crie um environment novo no Genexus com .NET Core e MySQL.
+![GX build Image](imagens/deploybuildimage2.png)
 
-![Genexus env](imagens/genexus-env.png)
+#### Passo 6
 
-Execute o create da base de dados e depois execute a aplicação para verificar que a aplicação está gravando os dados.
+Na linha de comando, executar o comando `docker images` para conferir se a imagem foi criada.
 
-Agora que a aplicação está rodando, faça o deploy da aplicação para o Docker.
+![Docker images](imagens/dockerlistimage2.png)
 
-Depois da imagem criada edite o aquivo docker-compose.yml para refletir a infraestrutura desejada, com a aplicação GX, o servidor MySQL e o volume.
+Notar que a imagem foi gerada com a TAG latest, poderia ter ser o número da versão, como no caso do mysql que tem a tag "8.0".
 
-- [Documentação do Docker Compose - volumes](https://docs.docker.com/compose/compose-file/#volumes)
+#### Passo 7
 
-Um ponto importante é a configuração da conexão da aplicação com o banco de dados, o Genexus tem o recurso de configurar a aplicação através de variáveis de ambiente. Veja no link abaixo como fazer isso e coloque as configurações necessárias no docker compose file.
+Na linha de comando, executar o comando `docker push docker_id/nome_do_repositorio:TAG` para publicar a imagem, substituindo docker_id pelo nome da conta, nome_do_repositorio pelo nome da imagem e TAG por latest. No exemplo do handson o comando ficaria assim: `docker push mkshimao/handsondockernetsqlserver:latest`.
 
-- [Application Configuration using Environment Variables](https://wiki.genexus.com/commwiki/servlet/wiki?39459,Application+Configuration+using+Environment+Variables)
+![Docker push](imagens/dockerpush.png)
 
-Com o arquivo docker-compose.yml editado, execute o comando `docker-compose up` e veja se a aplicação executa corretamente.
+#### Passo 8
+
+Acesse o site do Docker Hub, na aba repositories, verifique se a imagem aparece na lista.
+
+![Docker Hub Images](imagens/dockerhubimages.png)
+
+Lembrando que essa imagem foi publicada na área pública e que está disponível para qualquer um acessar. Para projetos de clientes o ideal é publicar as imagens na área privada ou publicar num serviço de repositório privado, como do Azure.

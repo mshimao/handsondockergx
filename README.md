@@ -24,6 +24,12 @@ Após a leitura e configuração dos requisitos, agora é fazer o download do Do
 
 Com isso temos o ambiente preparado para executar os contêineres Docker.
 
+### Criar uma conta no Docker Hub
+
+Acesse o site do Docker Hub e crie uma conta.
+
+- [Docker Hub](https://hub.docker.com/)
+
 ### Copiar os arquivos do hands-on
 
 Para prosseguir será necessário copiar os arquivos do hands-on, para isso, realizar o clone do repositório git ou o download do zip.
