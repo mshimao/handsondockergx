@@ -40,8 +40,18 @@ Com a KB criada, importar o arquivo xpz `HandsOnDocker.xpz` que está na pasta `
 
 ![xpz](/docs/imagens/genexusxpz.png)
 
-Crie a base de dados SQL Server para os dados e rode a aplicação, configure seu SQL Server para utilizar login com um usuário SQL e configure a conexão da aplicação utilizando um usuário e senha do SQL.
+Crie a base de dados SQL Server para os dados utilizando o IP da sua máquina no campo Server Name, isso é necessário para que o container docker possa acessar o SQL Server.
+
+Outro item importante, configure seu SQL Server para utilizar login com um usuário SQL e configure a conexão da aplicação utilizando um usuário e senha do SQL.
+
+Isso é necessário porque não é possível realizar a conexão a base de dados a partir do container usando Trusted Connection.
+
+![db config](/docs/imagens/genexudbconfig.png)
+
+Gere a aplicação no Genexus e rode a aplicação para ver ser tudo está ok.
 
 ![appgx](/docs/imagens/appgx.png)
+
+Agora todos os requisitos para a realização do hands estão prontos.
 
 Próximo: [Atividade 01](docs/01-atividade.md)

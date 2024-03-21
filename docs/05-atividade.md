@@ -1,86 +1,80 @@
-# Atividade 05
+# Atividade 04
 
-## Docker Compose
+## Docker Volume
 
-### Criando um arquivo docker-compose.yml
+### Acessando uma pasta do Host
 
-Crie na pasta C:\HandsOnDocker um arquivo com o nome docker-compose.yml e digite o conteúdo abaixo.
+#### Passo 1
 
-Dica: o arquivo YAML segue algumas regras de formatação que podem ser vistas neste post da [Wikipedia - YAML](https://pt.wikipedia.org/wiki/YAML).
+Vamos executar o comando `docker run -v c:/HandsOnDocker:/data alpine ls /data`, o parâmetro `-v` mapea a pasta C:\HandsOnDocker do Windows para a pasta /data do Linux Alpine, está sendo passado o comando `ls` para listar os arquivos da pasta data.
 
-Para validar o arquivo YAML use o validador online [YAML Validator](https://codebeautify.org/yaml-validator).
+![docker volume](imagens/dockervolume.png)
 
-```docker-compose
-version: '3.1'
+Vemos que o Docker mapeou a pasta corretamente e mostrou o conteúdo.
 
-services:
+#### Passo 2
 
-  wordpress:
-    image: wordpress
-    restart: always
-    ports:
-      - 8080:80
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
-
-  db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-```
-
-Abra uma tela de linha de comando e vá até a pasta C:\HandsOnDocker, vamos rodar o comando `docker-compose up` que irá executar o arquivo docker-compose.yml.
-
+Agora vamos executar criar o contêiner usando o parâmetro `-it` para podermos executar comandos no bash do Linux. Após o contêiner subir execute o comando ls para listar as pastas.
 
 ```bash
-C:\HandsOnDocker>docker-compose up
-Creating network "handsondocker_default" with the default driver
-Pulling wordpress (wordpress:)...
-latest: Pulling from library/wordpress
-fc7181108d40: Already exists
-0e65236fc68a: Pull complete
-657b7ad8209d: Pull complete
-fe9abd6f2547: Pull complete
-3f3b3b58af14: Pull complete
-6c87b44c0319: Pull complete
-879171658515: Pull complete
-29c3b2e8a58a: Pull complete
-c3a25239431e: Pull complete
-f297f66a8e1d: Pull complete
-702f5011adeb: Pull complete
-ea31bc27c1fb: Pull complete
-ad44f5a21cda: Pull complete
-2bacc84b4546: Pull complete
-02be7a597123: Pull complete
-9dddbf10a11a: Pull complete
-9beb0c6b7213: Pull complete
-93811cb0ca12: Pull complete
-b8edba923947: Pull complete
-Creating handsondocker_db_1        ... done
-Creating handsondocker_wordpress_1 ... done
-Attaching to handsondocker_db_1, handsondocker_wordpress_1
-db_1         | Initializing database
-db_1         | 2019-07-02T00:10:55.155755Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
-db_1         | 2019-07-02T00:10:55.985803Z 0 [Warning] InnoDB: New log files created, LSN=45790
-db_1         | 2019-07-02T00:10:56.056591Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
-db_1         | 2019-07-02T00:10:56.146837Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: dcc78a69-9c5d-11e9-bca9-0242ac140002.
-...
-
+docker run -it -v c:/HandsOnDocker:/data alpine
 ```
 
-Após o processamento parar, abra um browser e acesse a Url http://localhost:8080, o site do Wordpress estará pronto para ser inicializado.
+![linux ls](imagens/linuxls.png)
 
-![Wordpress](imagens/wordpress.png)
+#### Passo 3
 
-Implantação de uma aplicação Genexus com Docker Compose: [Atividade 05b](05b-atividade.md).
+Execute o comando `cd data` para entrar na pasta data. Agora vamos criar uma aquivo texto usando a instrução `cat > teste.txt`. Digite alguma coisa, dê enter e depois aperte CTRL + D para sair do arquivo. Execute o comando `ls` para listar os arquivos.
 
-Usando o Docker Compose com o Visual Studio: [Atividade 05b](05c-atividade.md).
+![linux cat](imagens/linuxcatfile.png)
 
+Verifique se na pasta C:\HandsOnDocker do Windows aparece o arquivo teste.txt.
 
+![windows files](imagens/windowsfiles.png)
+
+### Volumes
+
+Agora vamos trabalhar com volumes de forma diferente, vamos criar um volume usando o comando `docker volume create` como o nome de dados.
+
+```bash
+C:\HandsOnDocker>docker volume create dados
+dados
+
+C:\HandsOnDocker>docker volume ls
+DRIVER              VOLUME NAME
+local               dados
+```
+Crie agora um contêiner usando esse volume, para isso use o parâmetro `-v dados:/var/dados`, esse parâmetro mapea o volume dados para a pasta /var/dados do contêiner.
+
+```bash
+C:\HandsOnDocker>docker run -it --name servidor -v dados:/var/dados alpine
+/ # cd var
+/var # ls
+cache  dados  empty  lib    local  lock   log    opt    run    spool  tmp
+/var #
+```
+
+Agora vá até a pasta /var/dados e crie uma arquivo texto chamado teste.txt usando o comando `cat > teste.txt` e CRTL + D para sair do arquivo.
+
+```bash
+/var/dados # ls
+teste.txt
+```
+
+Abra outra tela de linha de comando, vamos criar um outro contêiner usando o volume dados, dando um nome diferente do anterior. Verifique se o arquivo criado anteriormente está lá.
+
+```bash
+C:\HandsOnDocker>docker run -it --name servidor2 -v dados:/var/dados alpine
+```
+
+Crie um outro arquivo na pasta dados e vá para a tela do contêiner anterior e liste o conteúdo da pasta, você verá que o arquivo criado aparece, ou seja os dois contêineres estão compartilhando o mesmo volume. 
+
+```bash
+/var/dados # ls
+teste.txt   teste2.txt
+/var/dados #
+```
+
+Agora conseguimos persistir informações mesmo que o contêiner pare ou seja apagado, podemos usar o volume para armazenar as bases de dados de um servidor de banco de dados ou outros dados relevantes.
+
+Próximo: [Atividade 06](06-atividade.md)
