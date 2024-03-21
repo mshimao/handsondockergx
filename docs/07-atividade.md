@@ -4,14 +4,51 @@
 
 ### Implantação de uma aplicação Genexus com Docker Compose
 
-Nesta atividade tente criar uma infra estrutura para executar uma aplicação .Net Core acessando um servidor MySQL com o banco de dados num Volume Docker.
+Nesta atividade tente criar uma infra estrutura para executar uma aplicação .Net Core acessando um servidor SQL Server com o banco de dados num Volume Docker.
 
 ![Infra Docker Compose](imagens/infra-dockercompose.png)
 
+#### Passo 1
 
-Baixe o HeidiSQL para poder realizar querys no MySQL.
+No Genexus, 
 
-- [Download HeidiSQL](https://www.heidisql.com/download.php)
+![target dir](imagens/targetenvdir.png)
+
+Crie na pasta C:\HandsOnDocker um arquivo com o nome "docker-compose-gx-sql.yml" e digite o conteúdo abaixo.
+
+```docker-compose
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+```
 
 Inicialmente crie um volume para persistir os dados do MySQL e configure um contêiner para usar esse volume seguindo as instruções do post (Criando Volumes com Docker)[https://blog.alura.com.br/criando-volumes-com-docker/].
 

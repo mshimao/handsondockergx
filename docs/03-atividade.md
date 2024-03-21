@@ -61,6 +61,8 @@ Esse comando copia o arquivo SampleWebApp.war para a pasta /usr/local/tomcat/web
 
 ![Dockerfile](imagens/dockerfile.png)
 
+#### Passo 2
+
 Agora que temos a "receita" de como vai ser nossa nova imagem Docker, vamos criá-la. Para isso é necessário dar build para gerar a nova imagem, vamos usar o comando [docker build](https://docs.docker.com/engine/reference/commandline/build/).
 Abra um tela de linha de comando e se posicione na pasta C:\HandsOnDocker e digite o comando `docker build -t tomcatsample .` para gerar a nova imagem.
 
@@ -97,6 +99,8 @@ tomcatsample   latest    4b2673e52227   6 minutes ago   455MB
 tomcat         latest    405afe63d576   13 days ago     455MB
 ```
 
+#### Passo 3
+
 O próximo passo é criar um container baseado na nossa nova imagem, executando o comando docker run. Execute o comando `docker run -p 8888:8080 tomcatsample` para subir um contêiner usando a imagem tomcatsample.
 A porta padrão 8080 do tomcat está sendo mapeada para a porta 8888 para evitar conflitos, se você já tem algum programa utilizando essa porta, mude para uma outra disponível.
 
@@ -107,6 +111,8 @@ Abra um browser e digite a seguinte Url http://localhost:8888/SampleWebApp/.
 ![sample web app](imagens/samplewebapp.png)
 
 E como podemos ver, a aplicação de exemplo foi instalada com sucesso.
+
+#### Passo 4
 
 Para seguirmos, liste os contêineres ativos com o comando `docker ps`.
 
