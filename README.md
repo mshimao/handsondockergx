@@ -38,7 +38,7 @@ Para prosseguir será necessário copiar os arquivos do hands-on, para isso, rea
 
 ### Criar um KB Genexus 
 
-Criar uma KB com o environment .NET Core.
+Criar uma KB chamada "handsondocker" com o environment .NET Core.
 
 ![KB NET Core](/docs/imagens/geradornetcore.png)
 

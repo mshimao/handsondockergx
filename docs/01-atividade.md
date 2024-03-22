@@ -43,7 +43,58 @@ O Docker Hub é um registro público amplamente utilizado, mas você também pod
 
 ![docker arq](imagens/dockerarq.png)
 
+
+### Imagem Docker
+
+Imagine que você está criando um bolo. A imagem Docker é a receita desse bolo. Ela contém todas as instruções necessárias para montar o bolo, como os ingredientes, o tempo de cozimento e a temperatura do forno.
+No caso do Docker, a imagem inclui todo o código-fonte ou binários, dependências e configurações necessárias para executar um aplicativo ou serviço.
+As imagens são apenas de leitura e não podem ser modificadas. Elas são armazenadas no Docker Hub ou em um outro registry de imagens (semelhante ao GitHub, mas para imagens Docker).
+Imagens Docker são compostas por sistemas de arquivos de camadas que ficam uma sobre as outras.
+
+![imagem docker](imagens/imagemdocker.png)
+
+Uma imagem pode ser usada como base para a criação de uma nova imagem, veremos mais adiante como isso é feito.
+
+
+### Container
+
+Agora, pense no contêiner como o bolo pronto. Ele é criado a partir da imagem e representa uma instância em execução do aplicativo ou serviço.
+Quando você executa o comando docker run, está criando um novo contêiner com base na imagem. O contêiner é onde o aplicativo ou serviço realmente roda.
+Os contêineres são modificáveis e podem ser iniciados, parados, reiniciados e excluídos.
+
+### Registry
+
+O Registry é como um repositório de imagens Docker, o mais conhecido é o Docker Hub. Lá, você encontra imagens prontas para uso, como imagens oficiais de serviços populares.
+Você pode pesquisar por imagens no Docker Hub usando o comando docker search.
+Também é possível criar suas próprias imagens e compartilhá-las no Docker Hub.
+Os provedores de serviços de nuvem oferecem instâncias de registry para serem utilizados em projetos privados, por exemplo o Azure oferece o Azure Container Registry.
+
+## Motivos para a usar o Docker
+
+Principais motivações para a utilização do Docker:
+- Isolamento e Portabilidade:
+    - O Docker permite empacotar um aplicativo e suas dependências em um container isolado. Isso significa que você pode executar o mesmo container em diferentes ambientes (desenvolvimento, teste, produção) sem preocupações com divergências.
+    - A portabilidade é fundamental: você pode criar um container no seu laptop e implantá-lo em servidores, nuvens públicas ou privadas.
+- Eficiência e Recursos:
+    - Os containers são leves e compartilham o mesmo kernel do sistema operacional. Isso economiza recursos em comparação com máquinas virtuais tradicionais, que exigem um sistema operacional completo para cada instância.
+    - Os containers consomem menos espaço em disco e inicializam mais rapidamente.
+- Gerenciamento Simplificado:
+    - Com o Docker, você pode gerenciar facilmente vários containers usando comandos simples. Iniciar, parar, reiniciar e escalar aplicativos é mais fácil.
+    - O Docker Compose permite definir aplicativos multi-container em um único arquivo YAML.
+- Reprodutibilidade e Consistência:
+    - A criação de imagens Docker é baseada em arquivos de configuração (Dockerfile). Isso garante que todos os membros da equipe usem a mesma base para construir e executar aplicativos.
+    - Evita o famoso problema do “Na minha máquina funciona!”.
+- Passo inicial para implantação no Kubernetes:
+    - Como o Kubernetes faz a orquestração de containeres, é essencial que sua aplicação esteja em imagens para que seja possível implantá-la no Kubernetes.
+
+### Container Linux ou Windows
+
+Hoje existe a possibilidade de executar conteineres Windows, mas na prática, a maioria dos sistemas rodam em conteineres Linux, por questão de custo e performance.
+Talvez o único caso indicado para a utilização de conteineres Windows seria a necessidade de rodar um aplicação legada.
+
 ## hello-world
+
+Nesta atividade e nas próximas utilizaremos o docker CLI para executar as atividades e não a interface gráfica do Docker Desktop. O motivo disso é que na maioria das situações em produção ou nos ambientes de provedores de nuvem, será necessário executar os comandos utilizando o CLI, pois o Docker Desktop não estará disponível.
 
 #### Passo 1
 

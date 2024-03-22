@@ -144,9 +144,11 @@ Deleted: sha256:fce289e99eb9bca977dae136fbe2a82b6b7d4c372474c9235adc1741675f587e
 Deleted: sha256:af0b15c8625bb1938f1d7b17081031f649fd14e6b233688eea3c5483994a66a3
 ```
 
+## Documentação do Docker CLI
+
 Acesse o site da documentação do Docker para conhecer outros comandos do Docker CLI:
 
-- [Documentação do Docker](https://docs.docker.com/reference/)
+- [Documentação do Docker CLI](https://docs.docker.com/reference/cli/docker/)
 
 
 Próximo: [Atividade 03](03-atividade.md)

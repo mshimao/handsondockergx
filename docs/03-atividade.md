@@ -124,4 +124,12 @@ Para parar o contêiner que está sendo executado utilizar o comando `docker sto
 
 Vimos como fazer o deploy de uma aplicação na mão, agora vamos ver como fazer isso com o Genexus.
 
+
+## Documentação do Dockerfile
+
+Para maiores detalhes sobre o Dockerfile, consultar a documentação abaixo:
+
+- [Documentação do Dockerfile](https://docs.docker.com/reference/dockerfile/)
+
+
 Próximo: [Atividade 04](04-atividade.md)

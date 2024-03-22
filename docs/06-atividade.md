@@ -8,6 +8,9 @@ O Docker Compose é uma ferramenta poderosa para gerenciar contêineres em ambie
 - Com o Docker Compose, você pode definir a estrutura de seus serviços, suas dependências e configurações.
 Por exemplo, se você tiver um aplicativo web com um servidor e um banco de dados, o Docker Compose permite definir ambos os serviços e suas interações em um único arquivo.
 
+Abaixo segue um exemplo de uma aplicação com vários containeres sendo executados no docker, para executar esses conteineres de forma sincronizada, é utilizado o Docker Compose.
+![docker compose sample](imagens/dockercomposediagram.png)
+
 ### Criando um arquivo docker-compose.yml
 
 #### Passo 1
@@ -68,5 +71,12 @@ Preencha os campos e clique em "Install WordPress", copie o valor do campo do pa
 Após o setup, faça o login.
 
 ![Wordpress](imagens/wordpress2.png)
+
+
+## Documentação do Docker Compose
+
+Para maiores detalhes sobre o Docker Compose, consultar a documentação abaixo:
+
+- [Documentação do Docker Compose](https://docs.docker.com/compose/)
 
 Próximo: [Atividade 07](07-atividade.md)

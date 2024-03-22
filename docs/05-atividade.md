@@ -77,4 +77,10 @@ teste.txt   teste2.txt
 
 Agora conseguimos persistir informações mesmo que o contêiner pare ou seja apagado, podemos usar o volume para armazenar as bases de dados de um servidor de banco de dados ou outros dados relevantes.
 
+## Documentação do Docker Volume
+
+Para maiores detalhes sobre o Docker Volume, consultar a documentação abaixo:
+
+- [Documentação do Docker Volume](https://docs.docker.com/storage/volumes/)
+
 Próximo: [Atividade 06](06-atividade.md)

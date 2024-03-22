@@ -59,3 +59,10 @@ Acesse o site do Docker Hub, na aba repositories, verifique se a imagem aparece 
 ![Docker Hub Images](imagens/dockerhubimages.png)
 
 Lembrando que essa imagem foi publicada na área pública e que está disponível para qualquer um acessar. Para projetos de clientes o ideal é publicar as imagens na área privada ou publicar num serviço de repositório privado, como do Azure.
+
+## Documentação do Docker Hub
+
+Para maiores detalhes sobre o Docker Hub, consultar a documentação abaixo:
+
+- [Documentação do Docker Hub](https://docs.docker.com/docker-hub/)
+
