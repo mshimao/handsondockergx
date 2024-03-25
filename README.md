@@ -62,6 +62,13 @@ Gere a aplicação no Genexus e rode a aplicação para ver ser tudo está ok.
 
 ![appgx](/docs/imagens/appgx.png)
 
+### Acesso remoto ao SQL Server
+
+Configure o SQL Server para aceitar conexões remotas, isso será necessário para a aplicação rodando no container acessar o SQL Server.
+
+- [Configurando o SQL Server para Acesso Remoto](docs/pdfs/Configurando-o-SQL-Server-para-Acesso-Remoto.pdf)
+
+
 Agora todos os requisitos para a realização do hands estão prontos.
 
 Próximo: [Atividade 01](docs/01-atividade.md)
