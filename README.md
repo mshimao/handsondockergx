@@ -8,9 +8,13 @@ Inicialmente é necessário configurar os requisitos para trabalharmos com o Gra
 
 Os requisitos são:
 - Docker Desktop for Windows
-- Genexus 18
+- Genexus 18 Upgrade 8
 - Gerador .NET Core (https://wiki.genexus.com/commwiki/wiki?38605,.NET+Generator+Requirements)
 - SQL Server 2016 ou superior
+
+Software opcionais:
+- [VS Code](https://code.visualstudio.com/download) - Editor de código open source.
+- [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) - Extensão do Docker para o VS Code. Auxilia na edição dos arquivos de configuração.
 
 ### Instalação do Docker Desktop for Windows
 

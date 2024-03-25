@@ -26,7 +26,7 @@ C:\HandsOnDocker>dir
                1 Dir(s)  11,219,484,672 bytes free
 ``` 
 
-Abra o Bloco de Notas e crie um arquivo chamado Dockerfile, como o arquivo deve ser sem extensão, temos que tirar a extensão txt que o Bloco de Notas coloca, para isso use o comando `ren Dockerfile.txt Dockerfile`.
+Abra o Bloco de Notas (ou o VS Code) e crie um arquivo chamado Dockerfile, como o arquivo deve ser sem extensão, temos que tirar a extensão txt que o Bloco de Notas coloca, para isso use o comando `ren Dockerfile.txt Dockerfile`.
 
 ```bash
 C:\HandsOnDocker>ren Dockerfile.txt Dockerfile

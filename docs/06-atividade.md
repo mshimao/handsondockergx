@@ -3,7 +3,7 @@
 ## Docker Compose
 
 O Docker Compose é uma ferramenta poderosa para gerenciar contêineres em ambientes de desenvolvimento, testes automatizados ou cenários de execução em um único host.
-- O Docker Compose é declarado em um arquivo chamado docker-compose.yml.
+- O Docker Compose é declarado em um arquivo chamado "docker-compose.yml".
 - Ele permite configurar e gerenciar múltiplos contêineres em um único arquivo YAML.
 - Com o Docker Compose, você pode definir a estrutura de seus serviços, suas dependências e configurações.
 Por exemplo, se você tiver um aplicativo web com um servidor e um banco de dados, o Docker Compose permite definir ambos os serviços e suas interações em um único arquivo.
@@ -19,7 +19,7 @@ Crie na pasta C:\HandsOnDocker um arquivo com o nome "docker-compose.yml" e digi
 
 Dica: o arquivo YAML segue algumas regras de formatação que podem ser vistas neste post da [Wikipedia - YAML](https://pt.wikipedia.org/wiki/YAML).
 
-Para validar o arquivo YAML use o validador online [YAML Validator](https://codebeautify.org/yaml-validator).
+Para validar o arquivo YAML use o validador online [YAML Validator](https://codebeautify.org/yaml-validator), ou usar um editor como o VS Code com a extensão para Docker instalado, para editar o arquivo YAML.
 
 ```docker-compose
 version: '3.1'
@@ -72,6 +72,9 @@ Após o setup, faça o login.
 
 ![Wordpress](imagens/wordpress2.png)
 
+#### Passo 4
+
+Vamos parar os conteineres e subir novamente para ver 
 
 ## Documentação do Docker Compose
 
