@@ -15,6 +15,8 @@ Abrir o Application Deployment tool.
 
 Selecionar a opção "Docker Image" no combo Target. Note que a imagem base para a geração da imagem é "mcr.microsoft.com/dotnet/aspnet:8.0", que já contém o .Net Core 8.0 Runtime instalado. 
 
+Para versões anteriores do Genexus, a imagem base pode ser outra.
+
 ![Docker Image](imagens/deploytarget.png)
 
 #### Passo 3
