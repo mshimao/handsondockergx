@@ -31,6 +31,10 @@ Clicar no botão "Deploy" para gerar a imagem.
 
 ![build image](imagens/deploybuildimage.png)
 
+Notem que o Genexus está executando um build num arquivo Dockerfile, esse arquivo pode ser encontrado na pasta \Deploy\DOCKER\context abaixo da pasta do enviroment.
+
+![genexus dockerfile](imagens/genexusdockerfile.png)
+
 Se listarmos as imagens, usando o comando `docker images` veremos o contêiner gerado com a aplicação Genexus com o nome "handsondockernetsqlserver".
 
 ![docker images](imagens/dockerlistimage.png)
@@ -40,6 +44,8 @@ O interessante é que a imagem .Net Core é menor que a do Tomcat.
 #### Passo 5
 
 Para executarmos a aplicação devemos usar o comando `docker run --rm -p 9999:5000 -e ASPNETCORE_URLS="http://*:5000" handsondockernetsqlserver` informando o nome da imagem e mapeando a porta.
+
+Para versões anteriores do Genexus o comando é `docker run --rm -p 9999:5000 handsondockernetsqlserver`.
 
 ![docker run](imagens/dockerrun.png)
 
