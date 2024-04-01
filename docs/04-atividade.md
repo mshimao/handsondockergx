@@ -65,6 +65,8 @@ Um dos motivos pode ser porque o SQL Server não está configurado para receber 
 
 Se mesmo com essa configuração o erro persistir, edite a propriedade Server Name do Data Store no Genexus colocando **host.docker.internal** no lugar do IP. Após isso dê build e faça novamente o deploy para o Docker pela opção Deploy Application do menu Build.
 
+Para alterar a configuração da conexão do banco de dados da aplicação é possível utilizar variáveis de ambiente que alteram os dados configurados no Genexus.
+
 - [Configuração de variáveis de ambiente no Docker](https://wiki.genexus.com/commwiki/wiki?53336,Application+Configuration+using+Environment+Variables+in+.NET+and+Java)
 
 Próximo: [Atividade 05](05-atividade.md)
