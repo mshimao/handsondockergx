@@ -6,6 +6,7 @@ Agora temos que configurar o deploy para o Docker, para isso vamos seguir as ins
 
 #### Passo 1
 
+Abrir no Genexus a kb anteriormente criada.
 Abrir o Application Deployment tool.
 
 ![Application Deployment tool](imagens/deployapptool.png)
