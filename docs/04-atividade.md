@@ -35,6 +35,10 @@ Notem que o Genexus está executando um build num arquivo Dockerfile, esse arqui
 
 ![genexus dockerfile](imagens/genexusdockerfile.png)
 
+Abrindo esse arquivo podemos ver os comandos executados.
+
+![genexus dockerfile](imagens/genexusdockerfile2.png)
+
 Se listarmos as imagens, usando o comando `docker images` veremos o contêiner gerado com a aplicação Genexus com o nome "handsondockernetsqlserver".
 
 ![docker images](imagens/dockerlistimage.png)
