@@ -74,7 +74,14 @@ Após o setup, faça o login.
 
 #### Passo 4
 
-Vamos parar os conteineres e subir novamente para ver 
+Vamos parar os conteineres e subir novamente para ver o que acontece, digitar o comando `docker-compose down` para parar os containeres.
+
+![docker compose down](imagens/dockercomposedown.png)
+
+Agora vamos executar novamente o comando `docker-compose up` e acessar o wordpress na url http://localhost:8888.
+
+![Wordpress 3](imagens/wordpress3.png)
+
 
 ## Documentação do Docker Compose
 

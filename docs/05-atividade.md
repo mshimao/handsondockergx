@@ -2,7 +2,7 @@
 
 ## Persistência de dados
 
-Quando um contêiner é desligado, os dados gravados no contêiner são perdidos, então como não perder as informações? Para isso existe 2 alternativas, utilizar Volume ou Bind mount.
+Quando um contêiner é desligado, os dados gravados no contêiner são perdidos, então como não perder as informações? Para isso existem 2 alternativas, utilizar Volume ou Bind mount.
 
 ## Docker Volume
 
